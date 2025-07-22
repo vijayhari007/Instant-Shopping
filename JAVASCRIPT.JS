@@ -1,10 +1,10 @@
 const products = [
-  { id: 1, name: "SHUDIDHAR", price: 999, img: "images/1.jpg", category: "Kurtas" },
-  { id: 2, name: "MODERN KURTA", price: 499, img: "images/2.jpg", category: "Kurtas" },
-  { id: 3, name: "FULL GOWN", price: 699, img: "images/3.jpg", category: "Gowns" },
-  { id: 4, name: "TRENDY TOP AND SKIRT", price: 1299, img: "images/4.jpg", category: "Tops & Skirts" },
-  { id: 5, name: "FASHION KURTA", price: 599, img: "images/5.jpg", category: "Kurtas" },
-  { id: 6, name: "KURTA MODEL", price: 21999, img: "images/6.jpg", category: "Kurtas" }
+  { id: 1, name: "SHUDIDHAR", price: 999, img: "1.jpg", category: "Kurtas" },
+  { id: 2, name: "MODERN KURTA", price: 499, img: "2.jpg", category: "Kurtas" },
+  { id: 3, name: "FULL GOWN", price: 699, img: "3.jpg", category: "Gowns" },
+  { id: 4, name: "TRENDY TOP AND SKIRT", price: 1299, img: "4.jpg", category: "Tops & Skirts" },
+  { id: 5, name: "FASHION KURTA", price: 599, img: "5.jpg", category: "Kurtas" },
+  { id: 6, name: "KURTA MODEL", price: 21999, img: "6.jpg", category: "Kurtas" }
 ];
 
 let cart = [];
