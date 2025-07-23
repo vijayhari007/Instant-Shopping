@@ -1,0 +1,266 @@
+/* Base Reset & Typography */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Header */
+header {
+  background-color: #2c3e50;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+header h1 {
+  font-size: 1.8rem;
+}
+header input[type="text"] {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  margin-right: 1rem;
+}
+header button {
+  padding: 0.5rem 1rem;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+header button:hover {
+  background-color: #2980b9;
+}
+
+/* Main Products Grid */
+main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 2rem;
+  justify-content: center;
+}
+.product {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 220px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+.product:hover {
+  transform: translateY(-5px);
+}
+.product img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.product h3 {
+  margin: 0.5rem 0;
+}
+.product p {
+  font-weight: bold;
+  color: #2c3e50;
+}
+.product button {
+  margin-top: 0.5rem;
+  background-color: #e67e22;
+  color: white;
+  padding: 0.6rem;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.product button:hover {
+  background-color: #d35400;
+}
+
+/* Modals - Cart, Checkout, Login */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.modal-content {
+  background: white;
+  border-radius: 10px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.modal-content h2 {
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+.modal-content button {
+  margin-top: 1rem;
+  background-color: #27ae60;
+  color: white;
+  padding: 0.75rem;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.modal-content button:hover {
+  background-color: #1e8449;
+}
+.modal-content .close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 22px;
+  color: #999;
+  cursor: pointer;
+}
+.modal-content .close:hover {
+  color: #e74c3c;
+}
+
+/* Cart Items List */
+#cart-items li {
+  list-style-type: style;;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#cart-items img {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+.cart-total-section {
+  padding: 10px;
+  font-size: 1.2rem;
+  text-align: right;
+  background-color: #f1f1f1;
+  border-top: 1px solid #ddd;
+  border-radius: 0 0 8px 8px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+
+/* Admin Login */
+#login-form {
+  display: flex;
+  flex-direction: column;
+}
+#login-form label {
+  font-weight: bold;
+  margin-top: 1rem;
+}
+#login-form input {
+  margin-top: 0.5rem;
+}
+#login-form button {
+  margin-top: 1.5rem;
+  background-color: #34495e;
+}
+#login-form button:hover {
+  background-color: #2c3e50;
+}
+
+/* Order History */
+#order-history {
+  list-style: none;
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+}
+#order-history li {
+  background: white;
+  border-left: 5px solid #3498db;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+#order-history li h4 {
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+#order-history hr {
+  margin-top: 1rem;
+  border: none;
+  border-top: 1px dashed #ccc;
+}
+
+/* Utility */
+.hidden {
+  display: none;
+}
+#category-filter {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-right: 1rem;
+}
+/* Admin Section Boxes */
+.order-section {
+  background-color: #ffffff;
+  border: 2px solid #3498db;
+  border-radius: 10px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  max-width: 900px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.order-section h2 {
+  margin-bottom: 1rem;
+  color: #2c3e50;
+  text-align: center;
+  border-bottom: 2px dashed #ccc;
+  padding-bottom: 0.5rem;
+}
+
+/* Logo Styling */
+.logo {
+  height: 60px;
+  width: auto;
+  vertical-align: middle;
+  margin-right: 7px;
+  border-radius: 5px;
+}

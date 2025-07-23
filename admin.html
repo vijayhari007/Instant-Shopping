@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <script>
+    if (localStorage.getItem("isAdminLoggedIn") !== "true") {
+      window.location.href = "login.html";
+    }
+  </script>
+<h1 style="text-align:center; margin-top: 20px;">📋 Orders List</h1>
+
+  <div class="order-section">
+  <h2>🕗 Pending</h2>
+  <ul id="pending-orders"></ul>
+</div>
+
+<div class="order-section">
+  <h2>🔄 On Process</h2>
+  <ul id="process-orders"></ul>
+</div>
+
+<div class="order-section">
+  <h2>✅ Completed</h2>
+  <ul id="completed-orders"></ul>
+</div>
+
+  <script>
+    let orders = JSON.parse(localStorage.getItem("orders") || "[]");
+
+    const pendingList = document.getElementById("pending-orders");
+    const processList = document.getElementById("process-orders");
+    const completedList = document.getElementById("completed-orders");
+
+    function renderOrders() {
+      // Clear all sections
+      pendingList.innerHTML = processList.innerHTML = completedList.innerHTML = "";
+
+      if (orders.length === 0) {
+        pendingList.innerHTML = "<li>No orders yet.</li>";
+        return;
+      }
+
+      orders.forEach((o, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <b>${o.name}</b> - <i>${o.items}</i><br>
+          ${o.door}, ${o.street}, ${o.city}, ${o.state} - ${o.pincode}<br>
+          📞 ${o.phone}<br>
+          <label>Status: </label>
+          <select onchange="updateStatus(${index}, this.value)">
+            <option value="Pending" ${o.status === "Pending" ? "selected" : ""}>Pending</option>
+            <option value="On Process" ${o.status === "On Process" ? "selected" : ""}>On Process</option>
+            <option value="Completed" ${o.status === "Completed" ? "selected" : ""}>Completed</option>
+          </select>
+          <hr>
+        `;
+
+        if (o.status === "Pending") pendingList.appendChild(li);
+        else if (o.status === "On Process") processList.appendChild(li);
+        else if (o.status === "Completed") completedList.appendChild(li);
+      });
+    }
+
+    function updateStatus(index, newStatus) {
+      orders[index].status = newStatus;
+      localStorage.setItem("orders", JSON.stringify(orders));
+      renderOrders();
+    }
+
+    function logout() {
+      localStorage.removeItem("isAdminLoggedIn");
+      window.location.href = "login.html";
+    }
+
+    renderOrders();
+  </script>
+</body>
+</html>
