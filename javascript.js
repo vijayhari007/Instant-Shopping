@@ -1,3 +1,33 @@
+// Loader Animation
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loader");
+  const percentageText = document.getElementById("percentage");
+  const welcomeText = document.getElementById("welcome-text");
+  const trolley = document.getElementById("trolley");
+  let percent = 0;
+
+  trolley.classList.add("move-trolley");
+
+  const loadingInterval = setInterval(() => {
+    percent++;
+    percentageText.textContent = percent + "%";
+
+    if (percent >= 100) {
+      clearInterval(loadingInterval);
+      loader.classList.add("fade-out");
+      setTimeout(() => {
+        document.body.classList.add("loaded");
+        loader.style.display = "none";
+
+        // Hide all modals after loader
+        document.querySelectorAll('.modal').forEach(modal => {
+          modal.style.display = 'none';
+        });
+      }, 1000);
+    }
+  }, 30); // adjust speed here
+});
+
 const products = [
   { id: 1, name: "SHUDIDHAR", price: 999, img: "1.jpg", category: "Kurtas" },
   { id: 2, name: "MODERN KURTA", price: 499, img: "2.jpg", category: "Kurtas" },
@@ -15,7 +45,6 @@ const cartItems = document.getElementById("cart-items");
 const searchInput = document.getElementById("search");
 const categoryFilter = document.getElementById("category-filter");
 
-// Show products
 function showProducts(filtered = products) {
   productList.innerHTML = "";
   filtered.forEach(product => {
@@ -32,7 +61,6 @@ function showProducts(filtered = products) {
 }
 showProducts();
 
-// Search + Category Filter
 searchInput.addEventListener("input", applyFilters);
 categoryFilter.addEventListener("change", applyFilters);
 
@@ -48,7 +76,6 @@ function applyFilters() {
   showProducts(filtered);
 }
 
-// Add to Cart
 function addToCart(id) {
   const existing = cart.find(item => item.id === id);
   if (existing) {
@@ -61,19 +88,16 @@ function addToCart(id) {
   alert("✅ Product added to cart!");
 }
 
-// Cart Count
 function updateCartCount() {
   const total = cart.reduce((sum, item) => sum + item.qty, 0);
   cartCount.innerText = total;
 }
 
-// Show Cart Modal
 function showCart() {
   document.getElementById("cart-modal").classList.remove("hidden");
   displayCart();
 }
 
-// Render Cart Items
 function displayCart() {
   cartItems.innerHTML = "";
 
@@ -91,16 +115,14 @@ function displayCart() {
     cartItems.appendChild(item);
   });
 
-  updateCartTotal(); // update total inside modal
+  updateCartTotal();
 }
 
-// Update Total Price
 function updateCartTotal() {
   const total = cart.reduce((sum, product) => sum + product.price * product.qty, 0);
   document.getElementById("total-price").textContent = `${total.toFixed(2)}`;
 }
 
-// Quantity Control
 function increaseQty(id) {
   const item = cart.find(p => p.id === id);
   if (item) item.qty += 1;
@@ -126,7 +148,6 @@ function removeItem(id) {
   displayCart();
 }
 
-// Checkout Flow
 function openCheckout() {
   closeCart();
   document.getElementById("checkout-modal").classList.remove("hidden");
@@ -144,7 +165,6 @@ function closeSuccess() {
   document.getElementById("success-modal").classList.add("hidden");
 }
 
-// Auto fill address
 function autoFillCityState() {
   const pin = document.getElementById("pincode").value;
   if (pin === "600001") {
@@ -156,7 +176,6 @@ function autoFillCityState() {
   }
 }
 
-// Submit Order
 document.getElementById("order-form").addEventListener("submit", e => {
   e.preventDefault();
   const name = document.getElementById("name").value;
@@ -168,17 +187,16 @@ document.getElementById("order-form").addEventListener("submit", e => {
   const state = document.getElementById("state").value;
 
   const order = {
-  name,
-  phone,
-  door,
-  street,
-  pincode,
-  city,
-  state,
-  items: cart.map(c => `${c.name} x${c.qty} = ₹${c.price * c.qty}`).join(", "),
-  status: "Pending" // 👈 added status
-};
-
+    name,
+    phone,
+    door,
+    street,
+    pincode,
+    city,
+    state,
+    items: cart.map(c => `${c.name} x${c.qty} = ₹${c.price * c.qty}`).join(", "),
+    status: "Pending"
+  };
 
   let orders = JSON.parse(localStorage.getItem("orders") || "[]");
   orders.push(order);
